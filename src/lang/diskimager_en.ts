@@ -202,11 +202,6 @@ Are you sure you want to exit?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="217"/>
-        <source>Disk Images (*.img *.IMG);;*.*</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../mainwindow.cpp" line="305"/>
         <source>Cancel Verify.
 Are you sure you want to cancel?</source>

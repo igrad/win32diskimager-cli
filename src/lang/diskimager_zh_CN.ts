@@ -124,70 +124,70 @@
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="175"/>
-        <location filename="../mainwindow.cpp" line="185"/>
-        <location filename="../mainwindow.cpp" line="195"/>
+        <location filename="../mainwindow.cpp" line="183"/>
+        <location filename="../mainwindow.cpp" line="193"/>
+        <location filename="../mainwindow.cpp" line="203"/>
         <source>Exit?</source>
         <translation>退出?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="175"/>
+        <location filename="../mainwindow.cpp" line="183"/>
         <source>Exiting now will result in a corrupt image file.
 Are you sure you want to exit?</source>
         <translation>现在退出映像文件将不完整.
 仍然退出?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="185"/>
+        <location filename="../mainwindow.cpp" line="193"/>
         <source>Exiting now will result in a corrupt disk.
 Are you sure you want to exit?</source>
         <translation>现在退出将造成磁盘文件不完整.
 仍然退出?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="219"/>
+        <location filename="../mainwindow.cpp" line="229"/>
         <source>Select a disk image</source>
         <translation>选择一个磁盘映像</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="262"/>
+        <location filename="../mainwindow.cpp" line="273"/>
         <source>Generating...</source>
         <translation>生成中...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="296"/>
-        <location filename="../mainwindow.cpp" line="305"/>
+        <location filename="../mainwindow.cpp" line="307"/>
+        <location filename="../mainwindow.cpp" line="316"/>
         <source>Cancel?</source>
         <translation>取消?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="296"/>
+        <location filename="../mainwindow.cpp" line="307"/>
         <source>Canceling now will result in a corrupt destination.
 Are you sure you want to cancel?</source>
         <translation>现在取消会造成目的文件不完整.
 仍然取消?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="326"/>
-        <location filename="../mainwindow.cpp" line="608"/>
-        <location filename="../mainwindow.cpp" line="709"/>
+        <location filename="../mainwindow.cpp" line="337"/>
+        <location filename="../mainwindow.cpp" line="619"/>
+        <location filename="../mainwindow.cpp" line="720"/>
         <source>Write Error</source>
         <translation>写入出错</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="326"/>
-        <location filename="../mainwindow.cpp" line="608"/>
-        <location filename="../mainwindow.cpp" line="823"/>
+        <location filename="../mainwindow.cpp" line="337"/>
+        <location filename="../mainwindow.cpp" line="619"/>
+        <location filename="../mainwindow.cpp" line="834"/>
         <source>Image file cannot be located on the target device.</source>
         <translation>在目标设备上找不到映像文件.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="336"/>
+        <location filename="../mainwindow.cpp" line="347"/>
         <source>Confirm overwrite</source>
         <translation>确认覆盖</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="336"/>
+        <location filename="../mainwindow.cpp" line="347"/>
         <source>Writing to a physical device can corrupt the device.
 (Target Device: %1 &quot;%2&quot;)
 Are you sure you want to continue?</source>
@@ -201,144 +201,145 @@ Are you sure you want to continue?</source>
         <translation>等待任务完成。.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="195"/>
+        <location filename="../mainwindow.cpp" line="79"/>
+        <location filename="../mainwindow.cpp" line="81"/>
+        <source>Disk Images (*.img *.IMG)</source>
+        <translation>磁盘映像 (*.img *.IMG)</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="203"/>
         <source>Exiting now will cancel verifying image.
 Are you sure you want to exit?</source>
         <translation>现在退出将取消校验映像文件.
 仍然退出?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="217"/>
-        <source>Disk Images (*.img *.IMG);;*.*</source>
-        <translation>磁盘映像 (*.img *.IMG);;*.*</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="305"/>
+        <location filename="../mainwindow.cpp" line="316"/>
         <source>Cancel Verify.
 Are you sure you want to cancel?</source>
         <translation>确认取消.
 确定要取消?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="475"/>
+        <location filename="../mainwindow.cpp" line="486"/>
         <source>Not enough available space!</source>
         <translation>磁盘空间不足！</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="561"/>
-        <location filename="../mainwindow.cpp" line="566"/>
-        <location filename="../mainwindow.cpp" line="571"/>
-        <location filename="../mainwindow.cpp" line="585"/>
-        <location filename="../mainwindow.cpp" line="1056"/>
-        <location filename="../mainwindow.cpp" line="1061"/>
-        <location filename="../mainwindow.cpp" line="1066"/>
-        <location filename="../mainwindow.cpp" line="1079"/>
+        <location filename="../mainwindow.cpp" line="572"/>
+        <location filename="../mainwindow.cpp" line="577"/>
+        <location filename="../mainwindow.cpp" line="582"/>
+        <location filename="../mainwindow.cpp" line="596"/>
+        <location filename="../mainwindow.cpp" line="1067"/>
+        <location filename="../mainwindow.cpp" line="1072"/>
+        <location filename="../mainwindow.cpp" line="1077"/>
+        <location filename="../mainwindow.cpp" line="1090"/>
         <source>File Error</source>
         <translation>文件错误</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="561"/>
-        <location filename="../mainwindow.cpp" line="1056"/>
+        <location filename="../mainwindow.cpp" line="572"/>
+        <location filename="../mainwindow.cpp" line="1067"/>
         <source>The selected file does not exist.</source>
         <translation>文件不存在.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="566"/>
-        <location filename="../mainwindow.cpp" line="1061"/>
+        <location filename="../mainwindow.cpp" line="577"/>
+        <location filename="../mainwindow.cpp" line="1072"/>
         <source>You do not have permision to read the selected file.</source>
         <translation>没有读取该文件的权限.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="571"/>
-        <location filename="../mainwindow.cpp" line="1066"/>
+        <location filename="../mainwindow.cpp" line="582"/>
+        <location filename="../mainwindow.cpp" line="1077"/>
         <source>The specified file contains no data.</source>
         <translation>该文件为空文件.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="575"/>
-        <location filename="../mainwindow.cpp" line="788"/>
-        <location filename="../mainwindow.cpp" line="1070"/>
+        <location filename="../mainwindow.cpp" line="586"/>
+        <location filename="../mainwindow.cpp" line="799"/>
+        <location filename="../mainwindow.cpp" line="1081"/>
         <source>Done.</source>
         <translation>完成.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="579"/>
-        <location filename="../mainwindow.cpp" line="792"/>
-        <location filename="../mainwindow.cpp" line="794"/>
-        <location filename="../mainwindow.cpp" line="1074"/>
+        <location filename="../mainwindow.cpp" line="590"/>
+        <location filename="../mainwindow.cpp" line="803"/>
+        <location filename="../mainwindow.cpp" line="805"/>
+        <location filename="../mainwindow.cpp" line="1085"/>
         <source>Complete</source>
         <translation>完成</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="579"/>
+        <location filename="../mainwindow.cpp" line="590"/>
         <source>Write Successful.</source>
         <translation>写入成功.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="585"/>
-        <location filename="../mainwindow.cpp" line="1079"/>
+        <location filename="../mainwindow.cpp" line="596"/>
+        <location filename="../mainwindow.cpp" line="1090"/>
         <source>Please specify an image file to use.</source>
         <translation>请选中要使用的映像文件.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="614"/>
+        <location filename="../mainwindow.cpp" line="625"/>
         <source>Confirm Overwrite</source>
         <translation>确认覆盖</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="614"/>
+        <location filename="../mainwindow.cpp" line="625"/>
         <source>Are you sure you want to overwrite the specified file?</source>
         <translation>缺认覆盖已存在的文件?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="709"/>
+        <location filename="../mainwindow.cpp" line="720"/>
         <source>Disk is not large enough for the specified image.</source>
         <translation>硬盘空间不够.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="792"/>
+        <location filename="../mainwindow.cpp" line="803"/>
         <source>Read Canceled.</source>
         <translation>读取已取消.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="794"/>
+        <location filename="../mainwindow.cpp" line="805"/>
         <source>Read Successful.</source>
         <translation>读取成功.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="801"/>
+        <location filename="../mainwindow.cpp" line="812"/>
         <source>File Info</source>
         <translation>文件信息</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="801"/>
+        <location filename="../mainwindow.cpp" line="812"/>
         <source>Please specify a file to save data to.</source>
         <translation>请选择要保存的文件路径.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="823"/>
+        <location filename="../mainwindow.cpp" line="834"/>
         <source>Verify Error</source>
         <translation>校验错误</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="957"/>
+        <location filename="../mainwindow.cpp" line="968"/>
         <source>Size Mismatch!</source>
         <translation>大小不匹配!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1002"/>
-        <location filename="../mainwindow.cpp" line="1018"/>
+        <location filename="../mainwindow.cpp" line="1013"/>
+        <location filename="../mainwindow.cpp" line="1029"/>
         <source>Verify Failure</source>
         <translation>校验失败</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1002"/>
-        <location filename="../mainwindow.cpp" line="1018"/>
+        <location filename="../mainwindow.cpp" line="1013"/>
+        <location filename="../mainwindow.cpp" line="1029"/>
         <source>Verification failed at sector: %1</source>
         <translation>校验失败的扇区: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1074"/>
+        <location filename="../mainwindow.cpp" line="1085"/>
         <source>Verify Successful.</source>
         <translation>校验成功.</translation>
     </message>
@@ -349,7 +350,7 @@ Are you sure you want to cancel?</source>
         <location filename="../disk.cpp" line="43"/>
         <location filename="../disk.cpp" line="249"/>
         <location filename="../disk.cpp" line="339"/>
-        <location filename="../disk.cpp" line="354"/>
+        <location filename="../disk.cpp" line="359"/>
         <source>File Error</source>
         <translation>文件错误</translation>
     </message>
@@ -376,7 +377,7 @@ Error %1: %2</source>
     <message>
         <location filename="../disk.cpp" line="59"/>
         <location filename="../disk.cpp" line="96"/>
-        <location filename="../disk.cpp" line="445"/>
+        <location filename="../disk.cpp" line="450"/>
         <source>Volume Error</source>
         <translation>卷错误</translation>
     </message>
@@ -494,7 +495,7 @@ Error %1: %2</source>
 错误 %1: %2</translation>
     </message>
     <message>
-        <location filename="../disk.cpp" line="355"/>
+        <location filename="../disk.cpp" line="360"/>
         <source>An error occurred while querying the properties.
 This usually means something is currently accessing the device; please close all applications and try again.
 
@@ -505,7 +506,7 @@ Error %1: %2</source>
 错误 %1: %2</translation>
     </message>
     <message>
-        <location filename="../disk.cpp" line="446"/>
+        <location filename="../disk.cpp" line="451"/>
         <source>An error occurred when attempting to get a handle on %3.
 Error %1: %2</source>
         <translation>获取句柄时发生错误 %3.
