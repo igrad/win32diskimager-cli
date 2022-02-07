@@ -176,7 +176,7 @@ Sei sicuro di voler uscire?</translation>
     </message>
     <message>
         <source>Read Only Allocated Partitions</source>
-        <translation>Partizioni allocate sola lettura</translation>
+        <translation>Leggi solamente le partizioni allocate</translation>
     </message>
     <message>
         <source>Write data from &apos;Image File&apos; to &apos;Device&apos;</source>
