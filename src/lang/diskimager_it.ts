@@ -224,7 +224,7 @@ Sei sicuro di voler uscire?</translation>
     </message>
     <message>
         <source>Generate selected hash on file</source>
-        <translation>Genera hash selezionato nel file</translation>
+        <translation>Genera hash selezionato sul file</translation>
     </message>
     <message>
         <source>Generate</source>
