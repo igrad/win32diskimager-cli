@@ -22,7 +22,7 @@
 ElapsedTimer::ElapsedTimer(QWidget *parent)
     : QLabel(parent)
 {
-    timer = new QTime();
+    timer = new QElapsedTimer();
     setTextFormat(Qt::PlainText);
     setTextInteractionFlags(Qt::NoTextInteraction);
     setText(QString("0:00/0:00"));

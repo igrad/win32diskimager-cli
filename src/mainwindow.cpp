@@ -134,15 +134,15 @@ void MainWindow::loadSettings()
 void MainWindow::initializeHomeDir()
 {
     myHomeDir = QDir::homePath();
-    if (myHomeDir == NULL){
+    if (myHomeDir.isNull()){
         myHomeDir = qgetenv("USERPROFILE");
     }
     /* Get Downloads the Windows way */
     QString downloadPath = qgetenv("DiskImagesDir");
     if (downloadPath.isEmpty()) {
         PWSTR pPath = NULL;
-        static GUID downloads = {0x374de290, 0x123f, 0x4565, 0x91, 0x64, 0x39,
-                                 0xc4, 0x92, 0x5e, 0x46, 0x7b};
+        static GUID downloads = {0x374de290, 0x123f, 0x4565, {0x91, 0x64, 0x39,
+                                 0xc4, 0x92, 0x5e, 0x46, 0x7b}};
         if (SHGetKnownFolderPath(downloads, 0, 0, &pPath) == S_OK) {
             downloadPath = QDir::fromNativeSeparators(QString::fromWCharArray(pPath));
             LocalFree(pPath);
@@ -221,7 +221,6 @@ void MainWindow::on_tbBrowse_clicked()
     dialog.setNameFilter(fileType);
     dialog.setFileMode(QFileDialog::AnyFile);
     dialog.setViewMode(QFileDialog::Detail);
-    dialog.setConfirmOverwrite(false);
     if (fileinfo.exists())
     {
         dialog.selectFile(fileLocation);
@@ -331,7 +330,7 @@ void MainWindow::on_bWrite_clicked()
             // build the drive letter as a const char *
             //   (without the surrounding brackets)
             QString qs = cboxDevice->currentText();
-            qs.replace(QRegExp("[\\[\\]]"), "");
+            qs.replace(QRegularExpression("[\\[\\]]"), "");
             QByteArray qba = qs.toLocal8Bit();
             const char *ltr = qba.data();
             if (QMessageBox::warning(this, tr("Confirm overwrite"), tr("Writing to a physical device can corrupt the device.\n"
@@ -1138,7 +1137,7 @@ char FirstDriveFromMask (ULONG unitmask)
 
 // register to receive notifications when USB devices are inserted or removed
 // adapted from http://www.known-issues.net/qt/qt-detect-event-windows.html
-bool MainWindow::nativeEvent(const QByteArray &type, void *vMsg, long *result)
+bool MainWindow::nativeEvent(const QByteArray &type, void *vMsg, long long *result)
 {
     Q_UNUSED(type);
     MSG *msg = (MSG*)vMsg;
