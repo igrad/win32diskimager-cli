@@ -42,6 +42,11 @@ class MainWindow : public QMainWindow, public Ui::MainWindow
                 instance = new MainWindow();
             return instance;
         }
+        static MainWindow* getInstanceIfAvailable() {
+            // getInstance crashes if invoked during init to get MessageBox-parent
+            // thus, we simply return instance (NULL, if not yet created) to avoid app crash.
+            return instance;
+        }
 
         ~MainWindow();
         void closeEvent(QCloseEvent *event);
