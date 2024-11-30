@@ -88,6 +88,8 @@ private:
         QClipboard *clipboard;
         void generateHash(char *filename, int hashish);
         QString myHomeDir;
+        QString myFileType;
+        QStringList myFileTypeList;
 };
 
 #endif // MAINWINDOW_H

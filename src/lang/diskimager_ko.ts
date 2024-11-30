@@ -124,70 +124,70 @@
         <translation>종료</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="175"/>
-        <location filename="../mainwindow.cpp" line="185"/>
-        <location filename="../mainwindow.cpp" line="195"/>
+        <location filename="../mainwindow.cpp" line="183"/>
+        <location filename="../mainwindow.cpp" line="193"/>
+        <location filename="../mainwindow.cpp" line="203"/>
         <source>Exit?</source>
         <translation>종료할까요?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="175"/>
+        <location filename="../mainwindow.cpp" line="183"/>
         <source>Exiting now will result in a corrupt image file.
 Are you sure you want to exit?</source>
         <translation>지금 종료하면 이미지 파일이 깨질 수 있습니다.
 종료할까요?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="185"/>
+        <location filename="../mainwindow.cpp" line="193"/>
         <source>Exiting now will result in a corrupt disk.
 Are you sure you want to exit?</source>
         <translation>지금 종료하면 디스크가 깨질 수 있습니다.
 종료할까요?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="219"/>
+        <location filename="../mainwindow.cpp" line="229"/>
         <source>Select a disk image</source>
         <translation>디스크 이미지 선택</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="262"/>
+        <location filename="../mainwindow.cpp" line="273"/>
         <source>Generating...</source>
         <translation>생성 중 ...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="296"/>
-        <location filename="../mainwindow.cpp" line="305"/>
+        <location filename="../mainwindow.cpp" line="307"/>
+        <location filename="../mainwindow.cpp" line="316"/>
         <source>Cancel?</source>
         <translation>취소할까요?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="296"/>
+        <location filename="../mainwindow.cpp" line="307"/>
         <source>Canceling now will result in a corrupt destination.
 Are you sure you want to cancel?</source>
         <translation>지금 취소하면 대상이 깨질 수 있습니다.
 취소할까요?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="326"/>
-        <location filename="../mainwindow.cpp" line="608"/>
-        <location filename="../mainwindow.cpp" line="709"/>
+        <location filename="../mainwindow.cpp" line="337"/>
+        <location filename="../mainwindow.cpp" line="619"/>
+        <location filename="../mainwindow.cpp" line="720"/>
         <source>Write Error</source>
         <translation>쓰기 오류</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="326"/>
-        <location filename="../mainwindow.cpp" line="608"/>
-        <location filename="../mainwindow.cpp" line="823"/>
+        <location filename="../mainwindow.cpp" line="337"/>
+        <location filename="../mainwindow.cpp" line="619"/>
+        <location filename="../mainwindow.cpp" line="834"/>
         <source>Image file cannot be located on the target device.</source>
         <translation>이미지 파일을 대상 기기에 위치시킬 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="336"/>
+        <location filename="../mainwindow.cpp" line="347"/>
         <source>Confirm overwrite</source>
         <translation>중복쓰기 확인</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="336"/>
+        <location filename="../mainwindow.cpp" line="347"/>
         <source>Writing to a physical device can corrupt the device.
 (Target Device: %1 &quot;%2&quot;)
 Are you sure you want to continue?</source>
@@ -201,144 +201,145 @@ Are you sure you want to continue?</source>
         <translation>작업을 위하여 기다리는 중.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="195"/>
+        <location filename="../mainwindow.cpp" line="79"/>
+        <location filename="../mainwindow.cpp" line="81"/>
+        <source>Disk Images (*.img *.IMG)</source>
+        <translation>디스크 이미지 (*.img *.IMG)</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="203"/>
         <source>Exiting now will cancel verifying image.
 Are you sure you want to exit?</source>
         <translation>지금 종료하는 것은 이미지 검증이 취소될 수 있습니다.
 종료할까요?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="217"/>
-        <source>Disk Images (*.img *.IMG);;*.*</source>
-        <translation>디스크 이미지 (*.img *.IMG);;*.*</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cpp" line="305"/>
+        <location filename="../mainwindow.cpp" line="316"/>
         <source>Cancel Verify.
 Are you sure you want to cancel?</source>
         <translation>검증 취소.
 취소할까요?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="475"/>
+        <location filename="../mainwindow.cpp" line="486"/>
         <source>Not enough available space!</source>
         <translation>공간이 충분하지 않습니다!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="561"/>
-        <location filename="../mainwindow.cpp" line="566"/>
-        <location filename="../mainwindow.cpp" line="571"/>
-        <location filename="../mainwindow.cpp" line="585"/>
-        <location filename="../mainwindow.cpp" line="1056"/>
-        <location filename="../mainwindow.cpp" line="1061"/>
-        <location filename="../mainwindow.cpp" line="1066"/>
-        <location filename="../mainwindow.cpp" line="1079"/>
+        <location filename="../mainwindow.cpp" line="572"/>
+        <location filename="../mainwindow.cpp" line="577"/>
+        <location filename="../mainwindow.cpp" line="582"/>
+        <location filename="../mainwindow.cpp" line="596"/>
+        <location filename="../mainwindow.cpp" line="1067"/>
+        <location filename="../mainwindow.cpp" line="1072"/>
+        <location filename="../mainwindow.cpp" line="1077"/>
+        <location filename="../mainwindow.cpp" line="1090"/>
         <source>File Error</source>
         <translation>파일 오류</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="561"/>
-        <location filename="../mainwindow.cpp" line="1056"/>
+        <location filename="../mainwindow.cpp" line="572"/>
+        <location filename="../mainwindow.cpp" line="1067"/>
         <source>The selected file does not exist.</source>
         <translation>선택된 파일이 존재하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="566"/>
-        <location filename="../mainwindow.cpp" line="1061"/>
+        <location filename="../mainwindow.cpp" line="577"/>
+        <location filename="../mainwindow.cpp" line="1072"/>
         <source>You do not have permision to read the selected file.</source>
         <translation>선택된 파일을 읽기위한 권한이 없습니다.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="571"/>
-        <location filename="../mainwindow.cpp" line="1066"/>
+        <location filename="../mainwindow.cpp" line="582"/>
+        <location filename="../mainwindow.cpp" line="1077"/>
         <source>The specified file contains no data.</source>
         <translation>지정된 파일은 자료가 없습니다.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="575"/>
-        <location filename="../mainwindow.cpp" line="788"/>
-        <location filename="../mainwindow.cpp" line="1070"/>
+        <location filename="../mainwindow.cpp" line="586"/>
+        <location filename="../mainwindow.cpp" line="799"/>
+        <location filename="../mainwindow.cpp" line="1081"/>
         <source>Done.</source>
         <translation>완료.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="579"/>
-        <location filename="../mainwindow.cpp" line="792"/>
-        <location filename="../mainwindow.cpp" line="794"/>
-        <location filename="../mainwindow.cpp" line="1074"/>
+        <location filename="../mainwindow.cpp" line="590"/>
+        <location filename="../mainwindow.cpp" line="803"/>
+        <location filename="../mainwindow.cpp" line="805"/>
+        <location filename="../mainwindow.cpp" line="1085"/>
         <source>Complete</source>
         <translation>완료</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="579"/>
+        <location filename="../mainwindow.cpp" line="590"/>
         <source>Write Successful.</source>
         <translation>쓰기 성공.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="585"/>
-        <location filename="../mainwindow.cpp" line="1079"/>
+        <location filename="../mainwindow.cpp" line="596"/>
+        <location filename="../mainwindow.cpp" line="1090"/>
         <source>Please specify an image file to use.</source>
         <translation>사용하기 위한 이미지 파일을 지정해주세요.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="614"/>
+        <location filename="../mainwindow.cpp" line="625"/>
         <source>Confirm Overwrite</source>
         <translation>중복 쓰기 확인</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="614"/>
+        <location filename="../mainwindow.cpp" line="625"/>
         <source>Are you sure you want to overwrite the specified file?</source>
         <translation>지정된 파일을 중복쓰기를 하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="709"/>
+        <location filename="../mainwindow.cpp" line="720"/>
         <source>Disk is not large enough for the specified image.</source>
         <translation>디스크가 지정된 이미지 보다 크지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="792"/>
+        <location filename="../mainwindow.cpp" line="803"/>
         <source>Read Canceled.</source>
         <translation>읽기 취소됨.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="794"/>
+        <location filename="../mainwindow.cpp" line="805"/>
         <source>Read Successful.</source>
         <translation>읽기 성공.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="801"/>
+        <location filename="../mainwindow.cpp" line="812"/>
         <source>File Info</source>
         <translation>파일 정보</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="801"/>
+        <location filename="../mainwindow.cpp" line="812"/>
         <source>Please specify a file to save data to.</source>
         <translation>자료를 저장하기 위한 파일을 지정하세요.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="823"/>
+        <location filename="../mainwindow.cpp" line="834"/>
         <source>Verify Error</source>
         <translation>검증 오류</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="957"/>
+        <location filename="../mainwindow.cpp" line="968"/>
         <source>Size Mismatch!</source>
         <translation>크기가 다름!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1002"/>
-        <location filename="../mainwindow.cpp" line="1018"/>
+        <location filename="../mainwindow.cpp" line="1013"/>
+        <location filename="../mainwindow.cpp" line="1029"/>
         <source>Verify Failure</source>
         <translation>검증 실패</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1002"/>
-        <location filename="../mainwindow.cpp" line="1018"/>
+        <location filename="../mainwindow.cpp" line="1013"/>
+        <location filename="../mainwindow.cpp" line="1029"/>
         <source>Verification failed at sector: %1</source>
         <translation>섹터에서 검증 실패 : %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1074"/>
+        <location filename="../mainwindow.cpp" line="1085"/>
         <source>Verify Successful.</source>
         <translation>검증 성공.</translation>
     </message>
@@ -349,7 +350,7 @@ Are you sure you want to cancel?</source>
         <location filename="../disk.cpp" line="43"/>
         <location filename="../disk.cpp" line="249"/>
         <location filename="../disk.cpp" line="339"/>
-        <location filename="../disk.cpp" line="354"/>
+        <location filename="../disk.cpp" line="359"/>
         <source>File Error</source>
         <translation>파일 오</translation>
     </message>
@@ -376,7 +377,7 @@ Error %1: %2</source>
     <message>
         <location filename="../disk.cpp" line="59"/>
         <location filename="../disk.cpp" line="96"/>
-        <location filename="../disk.cpp" line="445"/>
+        <location filename="../disk.cpp" line="450"/>
         <source>Volume Error</source>
         <translation>볼륨 오류</translation>
     </message>
@@ -494,7 +495,7 @@ Error %1: %2</source>
 오류 %1: %2</translation>
     </message>
     <message>
-        <location filename="../disk.cpp" line="355"/>
+        <location filename="../disk.cpp" line="360"/>
         <source>An error occurred while querying the properties.
 This usually means something is currently accessing the device; please close all applications and try again.
 
@@ -505,7 +506,7 @@ Error %1: %2</source>
 오류 %1: %2</translation>
     </message>
     <message>
-        <location filename="../disk.cpp" line="446"/>
+        <location filename="../disk.cpp" line="451"/>
         <source>An error occurred when attempting to get a handle on %3.
 Error %1: %2</source>
         <translation>%3 상의 핸들을 얻으려고 시도할 때 오류가 발생.

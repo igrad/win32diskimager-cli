@@ -74,6 +74,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     if (myHomeDir.isEmpty()){
         initializeHomeDir();
     }
+
+    if (myFileType.isEmpty()) {
+        myFileType = tr("Disk Images (*.img *.IMG)");
+    }
+    myFileTypeList << tr("Disk Images (*.img *.IMG)") << "*.*";
 }
 
 MainWindow::~MainWindow()
@@ -121,6 +126,7 @@ void MainWindow::saveSettings()
     QSettings userSettings("HKEY_CURRENT_USER\\Software\\Win32DiskImager", QSettings::NativeFormat);
     userSettings.beginGroup("Settings");
     userSettings.setValue("ImageDir", myHomeDir);
+    userSettings.setValue("FileType", myFileType);
     userSettings.endGroup();
 }
 
@@ -129,6 +135,7 @@ void MainWindow::loadSettings()
     QSettings userSettings("HKEY_CURRENT_USER\\Software\\Win32DiskImager", QSettings::NativeFormat);
     userSettings.beginGroup("Settings");
     myHomeDir = userSettings.value("ImageDir").toString();
+    myFileType = userSettings.value("FileType").toString();
 }
 
 void MainWindow::initializeHomeDir()
@@ -210,15 +217,17 @@ void MainWindow::on_tbBrowse_clicked()
     QFileInfo fileinfo(fileLocation);
 
     // See if there is a user-defined file extension.
-    QString fileType = qgetenv("DiskImagerFiles");
-    if (fileType.length() && !fileType.endsWith(";;"))
-    {
-        fileType.append(";;");
+    QString fileTypeEnv = qgetenv("DiskImagerFiles");
+
+    QStringList fileTypesList = fileTypeEnv.split(";;", QString::SkipEmptyParts) + myFileTypeList;
+    int index = fileTypesList.indexOf(myFileType);
+    if (index != -1) {
+        fileTypesList.move(index, 0);
     }
-    fileType.append(tr("Disk Images (*.img *.IMG);;*.*"));
+
     // create a generic FileDialog
     QFileDialog dialog(this, tr("Select a disk image"));
-    dialog.setNameFilter(fileType);
+    dialog.setNameFilters(fileTypesList);
     dialog.setFileMode(QFileDialog::AnyFile);
     dialog.setViewMode(QFileDialog::Detail);
     if (fileinfo.exists())
@@ -235,6 +244,7 @@ void MainWindow::on_tbBrowse_clicked()
         // selectedFiles returns a QStringList - we just want 1 filename,
         //	so use the zero'th element from that list as the filename
         fileLocation = (dialog.selectedFiles())[0];
+        myFileType = dialog.selectedNameFilter();
 
         if (!fileLocation.isNull())
         {

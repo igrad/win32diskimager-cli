@@ -183,32 +183,12 @@ Sei sicuro di voler uscire?</translation>
         <translation>Scrivi dati del &apos;File immagine&apos; nel &apos;Dispositivo&apos;</translation>
     </message>
     <message>
-        <source>Disk Images (*.img *.IMG);;*.*</source>
-        <translation>Immagini disco (*.img *.IMG);;*.*</translation>
-    </message>
-    <message>
         <source>Not enough available space!</source>
         <translation>Spazio disponibile insufficiente!</translation>
     </message>
     <message>
         <source>Read Canceled.</source>
         <translation>Lettura annulata.</translation>
-    </message>
-    <message>
-        <source>Copy MD5 to clipboard</source>
-        <translation type="vanished">Copia MD5 negli Appunti</translation>
-    </message>
-    <message>
-        <source>If checked, will generate the MD5 hash for the image file</source>
-        <translation type="vanished">Se seelzionato, verrà generato l&apos;hash MD5 per il file immagine</translation>
-    </message>
-    <message>
-        <source>MD5 Hash: </source>
-        <translation type="vanished">hash MD5:</translation>
-    </message>
-    <message>
-        <source>Downloads$</source>
-        <translation type="vanished">Downlaods$</translation>
     </message>
     <message>
         <source>Hash</source>
@@ -273,6 +253,10 @@ Sei sicuro di voler annullare la verifica?</translation>
     <message>
         <source>Verify Successful.</source>
         <translation>Verifica completata correttamente.</translation>
+    </message>
+    <message>
+        <source>Disk Images (*.img *.IMG)</source>
+        <translation>Immagini disco (*.img *.IMG)</translation>
     </message>
 </context>
 <context>
