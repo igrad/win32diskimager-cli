@@ -219,7 +219,7 @@ void MainWindow::on_tbBrowse_clicked()
     // See if there is a user-defined file extension.
     QString fileTypeEnv = qgetenv("DiskImagerFiles");
 
-    QStringList fileTypesList = fileTypeEnv.split(";;", QString::SkipEmptyParts) + myFileTypeList;
+    QStringList fileTypesList = fileTypeEnv.split(";;", Qt::SkipEmptyParts) + myFileTypeList;
     int index = fileTypesList.indexOf(myFileType);
     if (index != -1) {
         fileTypesList.move(index, 0);

@@ -25,12 +25,11 @@
 #endif
 
 #include <QtWidgets>
+#include <QClipboard>
 #include <windows.h>
-//#include <memory>
+#include <memory>
 #include "ui_mainwindow.h"
-
-class QClipboard;
-class ElapsedTimer;
+#include "elapsedtimer.h"
 
 class MainWindow : public QMainWindow, public Ui::MainWindow
 {
