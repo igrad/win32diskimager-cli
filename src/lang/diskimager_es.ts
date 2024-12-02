@@ -150,44 +150,44 @@ Are you sure you want to exit?</source>
         <translation>Seleccione una Imagen de Disco</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="273"/>
+        <location filename="../mainwindow.cpp" line="272"/>
         <source>Generating...</source>
         <translation>Generando...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="307"/>
-        <location filename="../mainwindow.cpp" line="316"/>
+        <location filename="../mainwindow.cpp" line="306"/>
+        <location filename="../mainwindow.cpp" line="315"/>
         <source>Cancel?</source>
         <translation>¿Cancelar?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="307"/>
+        <location filename="../mainwindow.cpp" line="306"/>
         <source>Canceling now will result in a corrupt destination.
 Are you sure you want to cancel?</source>
         <translation>Cancelar ahora resultará en un destino corrupto
 ¿Está seguro que quiere cancelar?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="337"/>
-        <location filename="../mainwindow.cpp" line="619"/>
-        <location filename="../mainwindow.cpp" line="720"/>
+        <location filename="../mainwindow.cpp" line="336"/>
+        <location filename="../mainwindow.cpp" line="618"/>
+        <location filename="../mainwindow.cpp" line="719"/>
         <source>Write Error</source>
         <translation>Error al Escribir</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="337"/>
-        <location filename="../mainwindow.cpp" line="619"/>
-        <location filename="../mainwindow.cpp" line="834"/>
+        <location filename="../mainwindow.cpp" line="336"/>
+        <location filename="../mainwindow.cpp" line="618"/>
+        <location filename="../mainwindow.cpp" line="833"/>
         <source>Image file cannot be located on the target device.</source>
         <translation>El Archivo Imagen no se puede ubicar en el dispositivo destino.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="347"/>
+        <location filename="../mainwindow.cpp" line="346"/>
         <source>Confirm overwrite</source>
         <translation>Confirmar sobrescritura</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="347"/>
+        <location filename="../mainwindow.cpp" line="346"/>
         <source>Writing to a physical device can corrupt the device.
 (Target Device: %1 &quot;%2&quot;)
 Are you sure you want to continue?</source>
@@ -214,132 +214,132 @@ Are you sure you want to exit?</source>
 ¿Está seguro que quiere salir?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="316"/>
+        <location filename="../mainwindow.cpp" line="315"/>
         <source>Cancel Verify.
 Are you sure you want to cancel?</source>
         <translation>Cancelar Verificación.
 ¿Estas seguro que quieres cancelar?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="486"/>
+        <location filename="../mainwindow.cpp" line="485"/>
         <source>Not enough available space!</source>
         <translation>¡No hay suficiente espacio disponible!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="572"/>
-        <location filename="../mainwindow.cpp" line="577"/>
-        <location filename="../mainwindow.cpp" line="582"/>
-        <location filename="../mainwindow.cpp" line="596"/>
-        <location filename="../mainwindow.cpp" line="1067"/>
-        <location filename="../mainwindow.cpp" line="1072"/>
-        <location filename="../mainwindow.cpp" line="1077"/>
-        <location filename="../mainwindow.cpp" line="1090"/>
+        <location filename="../mainwindow.cpp" line="571"/>
+        <location filename="../mainwindow.cpp" line="576"/>
+        <location filename="../mainwindow.cpp" line="581"/>
+        <location filename="../mainwindow.cpp" line="595"/>
+        <location filename="../mainwindow.cpp" line="1066"/>
+        <location filename="../mainwindow.cpp" line="1071"/>
+        <location filename="../mainwindow.cpp" line="1076"/>
+        <location filename="../mainwindow.cpp" line="1089"/>
         <source>File Error</source>
         <translation>Error de Archivo</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="572"/>
-        <location filename="../mainwindow.cpp" line="1067"/>
+        <location filename="../mainwindow.cpp" line="571"/>
+        <location filename="../mainwindow.cpp" line="1066"/>
         <source>The selected file does not exist.</source>
         <translation>El archivo seleccionado no existe.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="577"/>
-        <location filename="../mainwindow.cpp" line="1072"/>
+        <location filename="../mainwindow.cpp" line="576"/>
+        <location filename="../mainwindow.cpp" line="1071"/>
         <source>You do not have permision to read the selected file.</source>
         <translation>No tiene permision para leer el archivo seleccionado.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="582"/>
-        <location filename="../mainwindow.cpp" line="1077"/>
+        <location filename="../mainwindow.cpp" line="581"/>
+        <location filename="../mainwindow.cpp" line="1076"/>
         <source>The specified file contains no data.</source>
         <translation>El archivo especificado no contiene datos.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="586"/>
-        <location filename="../mainwindow.cpp" line="799"/>
-        <location filename="../mainwindow.cpp" line="1081"/>
+        <location filename="../mainwindow.cpp" line="585"/>
+        <location filename="../mainwindow.cpp" line="798"/>
+        <location filename="../mainwindow.cpp" line="1080"/>
         <source>Done.</source>
         <translation>Terminado.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="590"/>
-        <location filename="../mainwindow.cpp" line="803"/>
-        <location filename="../mainwindow.cpp" line="805"/>
-        <location filename="../mainwindow.cpp" line="1085"/>
+        <location filename="../mainwindow.cpp" line="589"/>
+        <location filename="../mainwindow.cpp" line="802"/>
+        <location filename="../mainwindow.cpp" line="804"/>
+        <location filename="../mainwindow.cpp" line="1084"/>
         <source>Complete</source>
         <translation>Completo</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="590"/>
+        <location filename="../mainwindow.cpp" line="589"/>
         <source>Write Successful.</source>
         <translation>Escritura Exitosa.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="596"/>
-        <location filename="../mainwindow.cpp" line="1090"/>
+        <location filename="../mainwindow.cpp" line="595"/>
+        <location filename="../mainwindow.cpp" line="1089"/>
         <source>Please specify an image file to use.</source>
         <translation>Por favor especifique un archivo de imagen para usar.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="625"/>
+        <location filename="../mainwindow.cpp" line="624"/>
         <source>Confirm Overwrite</source>
         <translation>Confirmar sobrescritura</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="625"/>
+        <location filename="../mainwindow.cpp" line="624"/>
         <source>Are you sure you want to overwrite the specified file?</source>
         <translation>¿Está seguro de que quiere sobrescribir el archivo especificado?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="720"/>
+        <location filename="../mainwindow.cpp" line="719"/>
         <source>Disk is not large enough for the specified image.</source>
         <translation>El disco no es lo suficientemente grande para la imagen especificada.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="803"/>
+        <location filename="../mainwindow.cpp" line="802"/>
         <source>Read Canceled.</source>
         <translation>Lectura Cancelada.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="805"/>
+        <location filename="../mainwindow.cpp" line="804"/>
         <source>Read Successful.</source>
         <translation>Lectura Exitosa.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="812"/>
+        <location filename="../mainwindow.cpp" line="811"/>
         <source>File Info</source>
         <translation>Información del Archivo</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="812"/>
+        <location filename="../mainwindow.cpp" line="811"/>
         <source>Please specify a file to save data to.</source>
         <translation>Por favor especifique un archivo para guardar los datos.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="834"/>
+        <location filename="../mainwindow.cpp" line="833"/>
         <source>Verify Error</source>
         <translation>Verificar Error </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="968"/>
+        <location filename="../mainwindow.cpp" line="967"/>
         <source>Size Mismatch!</source>
         <translation>¡Tamaño incorrecto!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1013"/>
-        <location filename="../mainwindow.cpp" line="1029"/>
+        <location filename="../mainwindow.cpp" line="1012"/>
+        <location filename="../mainwindow.cpp" line="1028"/>
         <source>Verify Failure</source>
         <translation>Falló la Verificación</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1013"/>
-        <location filename="../mainwindow.cpp" line="1029"/>
+        <location filename="../mainwindow.cpp" line="1012"/>
+        <location filename="../mainwindow.cpp" line="1028"/>
         <source>Verification failed at sector: %1</source>
         <translation>La verificación falló en el sector: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1085"/>
+        <location filename="../mainwindow.cpp" line="1084"/>
         <source>Verify Successful.</source>
         <translation>Verificación Exitosa.</translation>
     </message>
@@ -377,7 +377,7 @@ Error %1: %2</translation>
     <message>
         <location filename="../disk.cpp" line="59"/>
         <location filename="../disk.cpp" line="96"/>
-        <location filename="../disk.cpp" line="450"/>
+        <location filename="../disk.cpp" line="452"/>
         <source>Volume Error</source>
         <translation>Error de Volumen</translation>
     </message>
@@ -506,7 +506,7 @@ Esto generalmente significa que algo está accediendo al dispositivo; Cierre tod
 Error %1: %2</translation>
     </message>
     <message>
-        <location filename="../disk.cpp" line="451"/>
+        <location filename="../disk.cpp" line="453"/>
         <source>An error occurred when attempting to get a handle on %3.
 Error %1: %2</source>
         <translation>Se ha producido un error al intentar obtener un identificador en %3.
