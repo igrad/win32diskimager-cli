@@ -23,7 +23,7 @@ DEPENDPATH += .
 INCLUDEPATH += .
 #CONFIG += release
 DEFINES -= UNICODE
-QT += widgets
+QT += widgets core gui
 VERSION = 1.0
 VERSTR = '\\"$${VERSION}\\"'
 DEFINES += VER=\"$${VERSTR}\"
@@ -38,6 +38,7 @@ HEADERS += disk.h\
            mainwindow.h\
            droppablelineedit.h \
            elapsedtimer.h
+           driveio.h
 
 FORMS += mainwindow.ui
 
@@ -46,6 +47,7 @@ SOURCES += disk.cpp\
            mainwindow.cpp\
            droppablelineedit.cpp \
            elapsedtimer.cpp
+           driveio.cpp
 
 RESOURCES += gui_icons.qrc translations.qrc
 
