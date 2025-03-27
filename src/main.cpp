@@ -22,6 +22,7 @@
 #endif
 
 #include "mainwindow.h"
+#include "driveio.h"
 
 #include <QApplication>
 #include <cstdlib>
@@ -65,6 +66,8 @@ int main(int argc, char* argv[])
 
       MainWindow* mainwindow = MainWindow::getInstance();
       mainwindow->show();
+
+      UserInterface* ui = static_cast<UserInterface*>(mainwindow);
 
       return app.exec();
    }

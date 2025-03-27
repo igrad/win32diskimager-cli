@@ -116,7 +116,7 @@ MainWindow::~MainWindow()
     }
     if (cboxHashType != NULL)
     {
-       cboxHashType->clear();
+        cboxHashType->clear();
     }
 }
 
@@ -149,7 +149,7 @@ void MainWindow::initializeHomeDir()
     if (downloadPath.isEmpty()) {
         PWSTR pPath = NULL;
         static GUID downloads = {0x374de290, 0x123f, 0x4565, {0x91, 0x64, 0x39,
-                                 0xc4, 0x92, 0x5e, 0x46, 0x7b}};
+                                                              0xc4, 0x92, 0x5e, 0x46, 0x7b}};
         if (SHGetKnownFolderPath(downloads, 0, 0, &pPath) == S_OK) {
             downloadPath = QDir::fromNativeSeparators(QString::fromWCharArray(pPath));
             LocalFree(pPath);
@@ -329,7 +329,7 @@ void MainWindow::on_bWrite_clicked()
     {
         QFileInfo fileinfo(leFile->text());
         if (fileinfo.exists() && fileinfo.isFile() &&
-                fileinfo.isReadable() && (fileinfo.size() > 0) )
+            fileinfo.isReadable() && (fileinfo.size() > 0) )
         {
             if (leFile->text().at(0) == cboxDevice->currentText().at(1))
             {
@@ -483,7 +483,7 @@ void MainWindow::on_bWrite_clicked()
                     << "\n\nThe extra space " << ((datafound) ? "DOES" : "does not") << " appear to contain data"
                     << "\n\nContinue Anyway?";
                 if(QMessageBox::warning(this, tr("Not enough available space!"),
-                                        tr(msg.str().c_str()), QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok)
+                                         tr(msg.str().c_str()), QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok)
                 {
                     // truncate the image at the device size...
                     numsectors = availablesectors;
@@ -607,214 +607,13 @@ void MainWindow::on_bRead_clicked()
     QString myFile;
     if (!leFile->text().isEmpty())
     {
-        myFile = leFile->text();
-        QFileInfo fileinfo(myFile);
-        if (fileinfo.path()=="."){
-            myFile=(myHomeDir + "/" + leFile->text());
-        }
-        // check whether source and target device is the same...
-        if (myFile.at(0) == cboxDevice->currentText().at(1))
-        {
-            QMessageBox::critical(this, tr("Write Error"), tr("Image file cannot be located on the target device."));
-            return;
-        }
-        // confirm overwrite if the dest. file already exists
-        if (fileinfo.exists())
-        {
-            if (QMessageBox::warning(this, tr("Confirm Overwrite"), tr("Are you sure you want to overwrite the specified file?"),
-                                     QMessageBox::Yes|QMessageBox::No, QMessageBox::No) == QMessageBox::No)
-            {
-                return;
-            }
-        }
-        bCancel->setEnabled(true);
-        bWrite->setEnabled(false);
-        bRead->setEnabled(false);
-        bVerify->setEnabled(false);
-        status = STATUS_READING;
-        double mbpersec;
-        unsigned long long i, lasti, numsectors, filesize, spaceneeded = 0ull;
-        int volumeID = cboxDevice->currentText().at(1).toLatin1() - 'A';
-        hVolume = getHandleOnVolume(volumeID, GENERIC_READ);
-        if (hVolume == INVALID_HANDLE_VALUE)
-        {
-            status = STATUS_IDLE;
-            bCancel->setEnabled(false);
-            setReadWriteButtonState();
-            return;
-        }
-        DWORD deviceID = getDeviceID(hVolume);
-        if (!getLockOnVolume(hVolume))
-        {
-            CloseHandle(hVolume);
-            status = STATUS_IDLE;
-            hVolume = INVALID_HANDLE_VALUE;
-            bCancel->setEnabled(false);
-            setReadWriteButtonState();
-            return;
-        }
-        if (!unmountVolume(hVolume))
-        {
-            removeLockOnVolume(hVolume);
-            CloseHandle(hVolume);
-            status = STATUS_IDLE;
-            hVolume = INVALID_HANDLE_VALUE;
-            bCancel->setEnabled(false);
-            setReadWriteButtonState();
-            return;
-        }
-        hFile = getHandleOnFile(LPCWSTR(myFile.data()), GENERIC_WRITE);
-        if (hFile == INVALID_HANDLE_VALUE)
-        {
-            removeLockOnVolume(hVolume);
-            CloseHandle(hVolume);
-            status = STATUS_IDLE;
-            hVolume = INVALID_HANDLE_VALUE;
-            bCancel->setEnabled(false);
-            setReadWriteButtonState();
-            return;
-        }
-        hRawDisk = getHandleOnDevice(deviceID, GENERIC_READ);
-        if (hRawDisk == INVALID_HANDLE_VALUE)
-        {
-            removeLockOnVolume(hVolume);
-            CloseHandle(hFile);
-            CloseHandle(hVolume);
-            status = STATUS_IDLE;
-            hVolume = INVALID_HANDLE_VALUE;
-            hFile = INVALID_HANDLE_VALUE;
-            bCancel->setEnabled(false);
-            setReadWriteButtonState();
-            return;
-        }
-        numsectors = getNumberOfSectors(hRawDisk, &sectorsize);
-        if(partitionCheckBox->isChecked())
-        {
-            // Read MBR partition table
-            sectorData = readSectorDataFromHandle(hRawDisk, 0, 1ul, 512ul);
-            numsectors = 1ul;
-            // Read partition information
-            for (i=0ul; i<4ul; i++)
-            {
-                uint32_t partitionStartSector = *((uint32_t*) (sectorData + 0x1BE + 8 + 16*i));
-                uint32_t partitionNumSectors = *((uint32_t*) (sectorData + 0x1BE + 12 + 16*i));
-                // Set numsectors to end of last partition
-                if (partitionStartSector + partitionNumSectors > numsectors)
-                {
-                    numsectors = partitionStartSector + partitionNumSectors;
-                }
-            }
-        }
-        filesize = getFileSizeInSectors(hFile, sectorsize);
-        if (filesize >= numsectors)
-        {
-            spaceneeded = 0ull;
-        }
-        else
-        {
-            spaceneeded = (unsigned long long)(numsectors - filesize) * (unsigned long long)(sectorsize);
-        }
-        if (!spaceAvailable(myFile.left(3).replace(QChar('/'), QChar('\\')).toLatin1().data(), spaceneeded))
-        {
-            QMessageBox::critical(this, tr("Write Error"), tr("Disk is not large enough for the specified image."));
-            removeLockOnVolume(hVolume);
-            CloseHandle(hRawDisk);
-            CloseHandle(hFile);
-            CloseHandle(hVolume);
-            status = STATUS_IDLE;
-            sectorData = NULL;
-            hRawDisk = INVALID_HANDLE_VALUE;
-            hFile = INVALID_HANDLE_VALUE;
-            hVolume = INVALID_HANDLE_VALUE;
-            bCancel->setEnabled(false);
-            setReadWriteButtonState();
-            return;
-        }
-        if (numsectors == 0ul)
-        {
-            progressbar->setRange(0, 100);
-        }
-        else
-        {
-            progressbar->setRange(0, (int)numsectors);
-        }
-        lasti = 0ul;
-        update_timer.start();
-        elapsed_timer->start();
-        for (i = 0ul; i < numsectors && status == STATUS_READING; i += 1024ul)
-        {
-            sectorData = readSectorDataFromHandle(hRawDisk, i, (numsectors - i >= 1024ul) ? 1024ul:(numsectors - i), sectorsize);
-            if (sectorData == NULL)
-            {
-                removeLockOnVolume(hVolume);
-                CloseHandle(hRawDisk);
-                CloseHandle(hFile);
-                CloseHandle(hVolume);
-                status = STATUS_IDLE;
-                hRawDisk = INVALID_HANDLE_VALUE;
-                hFile = INVALID_HANDLE_VALUE;
-                hVolume = INVALID_HANDLE_VALUE;
-                bCancel->setEnabled(false);
-                setReadWriteButtonState();
-                return;
-            }
-            if (!writeSectorDataToHandle(hFile, sectorData, i, (numsectors - i >= 1024ul) ? 1024ul:(numsectors - i), sectorsize))
-            {
-                delete[] sectorData;
-                removeLockOnVolume(hVolume);
-                CloseHandle(hRawDisk);
-                CloseHandle(hFile);
-                CloseHandle(hVolume);
-                status = STATUS_IDLE;
-                sectorData = NULL;
-                hRawDisk = INVALID_HANDLE_VALUE;
-                hFile = INVALID_HANDLE_VALUE;
-                hVolume = INVALID_HANDLE_VALUE;
-                bCancel->setEnabled(false);
-                setReadWriteButtonState();
-                return;
-            }
-            delete[] sectorData;
-            sectorData = NULL;
-            if (update_timer.elapsed() >= ONE_SEC_IN_MS)
-            {
-                mbpersec = (((double)sectorsize * (i - lasti)) * ((float)ONE_SEC_IN_MS / update_timer.elapsed())) / 1024.0 / 1024.0;
-                statusbar->showMessage(QString("%1MB/s").arg(mbpersec));
-                update_timer.start();
-                elapsed_timer->update(i, numsectors);
-                lasti = i;
-            }
-            progressbar->setValue(i);
-            QCoreApplication::processEvents();
-        }
-        removeLockOnVolume(hVolume);
-        CloseHandle(hRawDisk);
-        CloseHandle(hFile);
-        CloseHandle(hVolume);
-        hRawDisk = INVALID_HANDLE_VALUE;
-        hFile = INVALID_HANDLE_VALUE;
-        hVolume = INVALID_HANDLE_VALUE;
-        progressbar->reset();
-        statusbar->showMessage(tr("Done."));
-        bCancel->setEnabled(false);
-        setReadWriteButtonState();
-        if (status == STATUS_CANCELED){
-            QMessageBox::information(this, tr("Complete"), tr("Read Canceled."));
-        } else {
-            QMessageBox::information(this, tr("Complete"), tr("Read Successful."));
-
-        }
-        updateHashControls();
+        emit RequestReadOperation(leFile->text());
     }
     else
     {
         QMessageBox::critical(this, tr("File Info"), tr("Please specify a file to save data to."));
     }
-    if (status == STATUS_EXIT)
-    {
-        close();
-    }
-    status = STATUS_IDLE;
+
     elapsed_timer->stop();
 }
 
@@ -826,7 +625,7 @@ void MainWindow::on_bVerify_clicked()
     {
         QFileInfo fileinfo(leFile->text());
         if (fileinfo.exists() && fileinfo.isFile() &&
-                fileinfo.isReadable() && (fileinfo.size() > 0) )
+            fileinfo.isReadable() && (fileinfo.size() > 0) )
         {
             if (leFile->text().at(0) == cboxDevice->currentText().at(1))
             {
@@ -965,7 +764,7 @@ void MainWindow::on_bVerify_clicked()
                     << "\n\nThe extra space " << ((datafound) ? "DOES" : "does not") << " appear to contain data"
                     << "\n\nContinue Anyway?";
                 if(QMessageBox::warning(this, tr("Size Mismatch!"),
-                                        tr(msg.str().c_str()), QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok)
+                                         tr(msg.str().c_str()), QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok)
                 {
                     // truncate the image at the device size...
                     numsectors = availablesectors;
@@ -1203,6 +1002,102 @@ bool MainWindow::nativeEvent(const QByteArray &type, void *vMsg, long long *resu
     return false; // let qt handle the rest
 }
 
+void MainWindow::HandleStatusChanged(const Status newStatus)
+{
+    switch(newStatus) {
+    case Status::Idle:
+    case Status::Canceled:
+        bCancel->setEnabled(false);
+        bWrite->setEnabled(true);
+        bRead->setEnabled(true);
+        bVerify->setEnabled(true);
+        break;
+    case Status::Reading:
+    case Status::Writing:
+    case Status::Verifying:
+        bCancel->setEnabled(true);
+        bWrite->setEnabled(false);
+        bRead->setEnabled(false);
+        bVerify->setEnabled(false);
+        break;
+    case Status::Exit:
+        close();
+    }
+}
+
+void MainWindow::HandleWarnImageFileContainsNoData()
+{
+
+}
+
+void MainWindow::HandleWarnImageFileDoesNotExist()
+{
+
+}
+
+void MainWindow::HandleWarnImageFileLocatedOnDrive()
+{
+
+}
+
+void MainWindow::HandleWarnImageFilePermissions()
+{
+
+}
+
+void MainWindow::HandleWarnNoLockOnVolume()
+{
+
+}
+
+void MainWindow::HandleWarnFailedToUnmountVolume()
+{
+
+}
+
+void MainWindow::HandleWarnNotEnoughSpaceOnVolume(const int required, const int availableSectors,
+                const int sectorSize,
+                const bool dataFound)
+{
+
+}
+
+void MainWindow::HandleWarnUnspecifiedIOError()
+{
+
+}
+
+void MainWindow::HandleInfoGeneratedHash(const QString hashString)
+{
+
+}
+
+void MainWindow::HandleRequestReadOverwriteConfirmation()
+{
+
+}
+
+void MainWindow::HandleSetProgressBarRange(const int min, const int max)
+{
+
+}
+
+void MainWindow::HandleProgressBarStatus(const double mbpersec, const int completion)
+{
+
+}
+
+void MainWindow::HandleOperationComplete(const bool cancelled)
+{
+
+}
+
+void MainWindow::HandleStartTimers()
+{
+    update_timer.start();
+    elapsed_timer->start();
+}
+
 void MainWindow::updateHashControls()
 {
     QFileInfo fileinfo(leFile->text());
@@ -1214,7 +1109,7 @@ void MainWindow::updateHashControls()
 
     if (cboxHashType->currentIndex() != 0 && !leFile->text().isEmpty() && validFile)
     {
-            bHashGen->setEnabled(true);
+        bHashGen->setEnabled(true);
     }
     else
     {

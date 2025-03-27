@@ -37,8 +37,9 @@ QMAKE_TARGET_COPYRIGHT = "Copyright (C) 2009-2017 Windows ImageWriter Team"
 HEADERS += disk.h\
            mainwindow.h\
            droppablelineedit.h \
-           elapsedtimer.h
-           driveio.h
+           elapsedtimer.h \
+           driveio.h \
+           userinterface.h
 
 FORMS += mainwindow.ui
 
@@ -46,7 +47,7 @@ SOURCES += disk.cpp\
            main.cpp\
            mainwindow.cpp\
            droppablelineedit.cpp \
-           elapsedtimer.cpp
+           elapsedtimer.cpp \
            driveio.cpp
 
 RESOURCES += gui_icons.qrc translations.qrc

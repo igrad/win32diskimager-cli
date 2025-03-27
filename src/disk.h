@@ -53,7 +53,7 @@ bool getLockOnVolume(HANDLE handle);
 bool removeLockOnVolume(HANDLE handle);
 bool unmountVolume(HANDLE handle);
 bool isVolumeUnmounted(HANDLE handle);
-char *readSectorDataFromHandle(HANDLE handle, unsigned long long startsector, unsigned long long numsectors, unsigned long long sectorsize);
+char* readSectorDataFromHandle(HANDLE handle, unsigned long long startsector, unsigned long long numsectors, unsigned long long sectorsize);
 bool writeSectorDataToHandle(HANDLE handle, char *data, unsigned long long startsector, unsigned long long numsectors, unsigned long long sectorsize);
 unsigned long long getNumberOfSectors(HANDLE handle, unsigned long long *sectorsize);
 unsigned long long getFileSizeInSectors(HANDLE handle, unsigned long long sectorsize);

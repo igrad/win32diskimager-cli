@@ -17,78 +17,96 @@
  *                 https://sourceforge.net/projects/win32diskimager/  *
  **********************************************************************/
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #ifndef WINVER
 #define WINVER 0x0601
 #endif
 
-#include <QtWidgets>
+#include "userinterface.h"
+#include <QtWidgets/QMainWindow>
 #include <QClipboard>
 #include <windows.h>
-#include <memory>
 #include "ui_mainwindow.h"
 #include "elapsedtimer.h"
 
-class MainWindow : public QMainWindow, public Ui::MainWindow
+class MainWindow : public QMainWindow, public Ui::MainWindow, public UserInterface
 {
     Q_OBJECT
-    public:
-        static MainWindow* getInstance() {
-            // !NOT thread safe  - first call from main only
-            if (!instance)
-                instance = new MainWindow();
-            return instance;
-        }
-        static MainWindow* getInstanceIfAvailable() {
-            // getInstance crashes if invoked during init to get MessageBox-parent
-            // thus, we simply return instance (NULL, if not yet created) to avoid app crash.
-            return instance;
-        }
 
-        ~MainWindow();
-        void closeEvent(QCloseEvent *event);
-        enum Status {STATUS_IDLE=0, STATUS_READING, STATUS_WRITING, STATUS_VERIFYING, STATUS_EXIT, STATUS_CANCELED};
-        bool nativeEvent(const QByteArray &type, void *vMsg, long long *result);
-    protected slots:
-        void on_tbBrowse_clicked();
-        void on_bCancel_clicked();
-        void on_bWrite_clicked();
-        void on_bRead_clicked();
-        void on_bVerify_clicked();
-        void on_leFile_editingFinished();
-        void on_bHashCopy_clicked();
+public:
+    static MainWindow* getInstance() {
+        // !NOT thread safe  - first call from main only
+        if (!instance)
+            instance = new MainWindow();
+        return instance;
+    }
+    static MainWindow* getInstanceIfAvailable() {
+        // getInstance crashes if invoked during init to get MessageBox-parent
+        // thus, we simply return instance (NULL, if not yet created) to avoid app crash.
+        return instance;
+    }
+
+    ~MainWindow();
+    void closeEvent(QCloseEvent *event) override;
+    bool nativeEvent(const QByteArray &type, void *vMsg, long long *result) override;
+
+public slots:
+    void HandleStatusChanged(const Status newStatus) override;
+    void HandleWarnImageFileContainsNoData() override;
+    void HandleWarnImageFileDoesNotExist() override;
+    void HandleWarnImageFileLocatedOnDrive() override;
+    void HandleWarnImageFilePermissions() override;
+    void HandleWarnNoLockOnVolume() override;
+    void HandleWarnFailedToUnmountVolume() override;
+    void HandleWarnNotEnoughSpaceOnVolume(const int required, const int availableSectors,
+                                    const int sectorSize,
+                                    const bool dataFound) override;
+    void HandleWarnUnspecifiedIOError() override;
+    void HandleInfoGeneratedHash(const QString hashString) override;
+    void HandleRequestReadOverwriteConfirmation() override;
+    void HandleSetProgressBarRange(const int min, const int max) override;
+    void HandleProgressBarStatus(const double mbpersec, const int completion) override;
+    void HandleOperationComplete(const bool cancelled) override;
+    void HandleStartTimers() override;
+
+protected slots:
+    void on_tbBrowse_clicked();
+    void on_bCancel_clicked();
+    void on_bWrite_clicked();
+    void on_bRead_clicked();
+    void on_bVerify_clicked();
+    void on_leFile_editingFinished();
+    void on_bHashCopy_clicked();
+
 private slots:
-        void on_cboxHashType_IdxChg();
-        void on_bHashGen_clicked();
+    void on_cboxHashType_IdxChg();
+    void on_bHashGen_clicked();
+
 protected:
-        MainWindow(QWidget* = NULL);
+    MainWindow(QWidget* = NULL);
+
 private:
-        static MainWindow* instance;
-        // find attached devices
-        void getLogicalDrives();
-        void setReadWriteButtonState();
-        void saveSettings();
-        void loadSettings();
-        void initializeHomeDir();
-        void updateHashControls();
+    static MainWindow* instance;
+    // find attached devices
+    void getLogicalDrives();
+    void setReadWriteButtonState();
+    void saveSettings();
+    void loadSettings();
+    void initializeHomeDir();
+    void updateHashControls();
 
-        HANDLE hVolume;
-        HANDLE hFile;
-        HANDLE hRawDisk;
-        static const unsigned short ONE_SEC_IN_MS = 1000;
-        unsigned long long sectorsize;
-        int status;
-        char *sectorData;
-        char *sectorData2; //for verify
-        QElapsedTimer update_timer;
-        ElapsedTimer *elapsed_timer = NULL;
-        QClipboard *clipboard;
-        void generateHash(char *filename, int hashish);
-        QString myHomeDir;
-        QString myFileType;
-        QStringList myFileTypeList;
+    HANDLE hVolume;
+    HANDLE hFile;
+    HANDLE hRawDisk;
+    unsigned long long sectorsize;
+    char *sectorData;
+    char *sectorData2; //for verify
+    QElapsedTimer update_timer;
+    ElapsedTimer *elapsed_timer = NULL;
+    QClipboard *clipboard;
+    void generateHash(char *filename, int hashish);
+    QString myHomeDir;
+    QString myFileType;
+    QStringList myFileTypeList;
 };
-
-#endif // MAINWINDOW_H

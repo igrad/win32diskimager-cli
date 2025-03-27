@@ -1,8 +1,16 @@
 #include "driveio.h"
+#include <windows.h>
+#include <winioctl.h>
+#include <shlobj.h>
+
+namespace
+{
+constexpr int MS_PER_SEC = 1000;
+}
 
 DriveIO::DriveIO(QObject* parent)
     : QObject(parent)
-    , DriveLetter(" ")
+    , DriveLetter(' ')
     , ImageFilePath("")
     , OperationStatus(Status::Idle)
     , ReadOnlyPartitions(false)
@@ -19,7 +27,10 @@ bool DriveIO::SetImageFile(const QString filePath)
     if(Status::Idle == OperationStatus)
     {
         ImageFilePath = filePath;
+        return true;
     }
+
+    return false;
 }
 
 bool DriveIO::SetDriveLetter(const char driveLetter)
@@ -27,7 +38,10 @@ bool DriveIO::SetDriveLetter(const char driveLetter)
     if(Status::Idle == OperationStatus)
     {
         DriveLetter = driveLetter;
+        return true;
     }
+
+    return false;
 }
 
 void DriveIO::ValidateRead()
@@ -52,14 +66,18 @@ void DriveIO::ValidateRead()
     {
         emit RequestReadOverwriteConfirmation();
     }
+    else
+    {
+        DoRead();
+    }
 }
 
 void DriveIO::DoRead()
 {
     SetStatus(Status::Reading);
 
-    double mbpersec;
-    unsigned long long i, lasti, numSectors, fileSize, spaceNeeded = 0ull;
+    double mbComplete;
+    unsigned long long numSectors, fileSize, spaceNeeded = 0ull;
     int volumeID = DriveLetter - 'A';
     hVolume = getHandleOnVolume(volumeID, GENERIC_READ);
     if(hVolume == INVALID_HANDLE_VALUE)
@@ -89,7 +107,7 @@ void DriveIO::DoRead()
         return;
     }
 
-    hFile = getHandleOnFile(LPCWSTR(myFile.data()), GENERIC_WRITE);
+    hFile = getHandleOnFile(LPCWSTR(ImageFilePath.data()), GENERIC_WRITE);
     if (hFile == INVALID_HANDLE_VALUE)
     {
         removeLockOnVolume(hVolume);
@@ -113,66 +131,74 @@ void DriveIO::DoRead()
         return;
     }
 
-    numsectors = getNumberOfSectors(hRawDisk, &sectorsize);
+    numSectors = getNumberOfSectors(hRawDisk, &SectorSize);
     if(ReadOnlyPartitions)
     {
         // Read MBR partition table
-        sectorData = readSectorDataFromHandle(hRawDisk, 0, 1ul, 512ul);
-        numsectors = 1ul;
+        SectorData = readSectorDataFromHandle(hRawDisk, 0, 1ul, 512ul);
+        numSectors = 1ul;
         // Read partition information
-        for (i=0ul; i<4ul; i++)
+        for (unsigned long long i = 0ul; i < 4ul; i++)
         {
-            uint32_t partitionStartSector = *((uint32_t*) (sectorData + 0x1BE + 8 + 16*i));
-            uint32_t partitionNumSectors = *((uint32_t*) (sectorData + 0x1BE + 12 + 16*i));
-            // Set numsectors to end of last partition
-            if (partitionStartSector + partitionNumSectors > numsectors)
+            uint32_t partitionStartSector = *((uint32_t*) (SectorData + 0x1BE + 8 + 16*i));
+            uint32_t partitionNumSectors = *((uint32_t*) (SectorData + 0x1BE + 12 + 16*i));
+            // Set numSectors to end of last partition
+            if (partitionStartSector + partitionNumSectors > numSectors)
             {
-                numsectors = partitionStartSector + partitionNumSectors;
+                numSectors = partitionStartSector + partitionNumSectors;
             }
         }
     }
 
-    filesize = getFileSizeInSectors(hFile, sectorsize);
-    if (filesize >= numsectors)
+    fileSize = getFileSizeInSectors(hFile, SectorSize);
+    if (fileSize >= numSectors)
     {
-        spaceneeded = 0ull;
+        spaceNeeded = 0ull;
     }
     else
     {
-        spaceneeded = (unsigned long long)(numsectors - filesize) * (unsigned long long)(sectorsize);
+        spaceNeeded = (unsigned long long)(numSectors - fileSize) * (unsigned long long)(SectorSize);
     }
 
-    if (!spaceAvailable(myFile.left(3).replace(QChar('/'), QChar('\\')).toLatin1().data(), spaceneeded))
+    if (!spaceAvailable(ImageFilePath.left(3).replace(QChar('/'), QChar('\\')).toLatin1().data(), spaceNeeded))
     {
-        emit WarnNotEnoughSpaceOnVolume();
+        emit WarnNotEnoughSpaceOnDisk();
+
         removeLockOnVolume(hVolume);
         CloseHandle(hRawDisk);
         CloseHandle(hFile);
         CloseHandle(hVolume);
         SetStatus(Status::Idle);
-        sectorData = NULL;
+        SectorData = nullptr;
         hRawDisk = INVALID_HANDLE_VALUE;
         hFile = INVALID_HANDLE_VALUE;
         hVolume = INVALID_HANDLE_VALUE;
         return;
     }
 
-    if (numsectors == 0ul)
+    if (numSectors == 0ul)
     {
         emit SetProgressBarRange(0, 100);
     }
     else
     {
-        emit SetProgressBarRange(0, (int)numsectors);
+        emit SetProgressBarRange(0, (int)numSectors);
     }
 
-    lasti = 0ul;
-    update_timer.start();
-    elapsed_timer->start();
-    for (i = 0ul; i < numsectors && status == STATUS_READING; i += 1024ul)
+    unsigned long long lasti = 0ul;
+    emit StartTimers();
+    for (unsigned long long sectorIter = 0ul;
+         (sectorIter < numSectors) && (OperationStatus == Status::Reading);
+         sectorIter += 1024ul)
     {
-        sectorData = readSectorDataFromHandle(hRawDisk, i, (numsectors - i >= 1024ul) ? 1024ul:(numsectors - i), sectorsize);
-        if (sectorData == NULL)
+        const unsigned long long numSectorsToRead = (numSectors - sectorIter >= 1024ul) ?
+                                                        1024ul :
+                                                        (numSectors - sectorIter);
+        SectorData = readSectorDataFromHandle(hRawDisk,
+                                              sectorIter,
+                                              numSectorsToRead,
+                                              SectorSize);
+        if (SectorData == nullptr)
         {
             SetStatus(Status::Idle);
             removeLockOnVolume(hVolume);
@@ -186,15 +212,19 @@ void DriveIO::DoRead()
             return;
         }
 
-        if (!writeSectorDataToHandle(hFile, sectorData, i, (numsectors - i >= 1024ul) ? 1024ul:(numsectors - i), sectorsize))
+        if (!writeSectorDataToHandle(hFile,
+                                     SectorData,
+                                     sectorIter,
+                                     numSectorsToRead,
+                                     SectorSize))
         {
-            delete[] sectorData;
+            delete[] SectorData;
             removeLockOnVolume(hVolume);
             CloseHandle(hRawDisk);
             CloseHandle(hFile);
             CloseHandle(hVolume);
             SetStatus(Status::Idle);
-            sectorData = NULL;
+            SectorData = nullptr;
             hRawDisk = INVALID_HANDLE_VALUE;
             hFile = INVALID_HANDLE_VALUE;
             hVolume = INVALID_HANDLE_VALUE;
@@ -202,18 +232,10 @@ void DriveIO::DoRead()
             return;
         }
 
-        delete[] sectorData;
-        sectorData = NULL;
-        if (update_timer.elapsed() >= ONE_SEC_IN_MS)
-        {
-            mbpersec = (((double)sectorsize * (i - lasti)) * ((float)ONE_SEC_IN_MS / update_timer.elapsed())) / 1024.0 / 1024.0;
-            statusbar->showMessage(QString("%1MB/s").arg(mbpersec));
-            update_timer.start();
-            elapsed_timer->update(i, numsectors);
-            lasti = i;
-        }
-        progressbar->setValue(i);
-        emit ProgressBarStatus(mbpersec, i);
+        delete[] SectorData;
+        SectorData = nullptr;
+        mbComplete = SectorSize * sectorIter + 1024ul;
+        emit ProgressBarStatus(mbComplete, sectorIter);
         QCoreApplication::processEvents();
     }
     removeLockOnVolume(hVolume);
@@ -224,12 +246,9 @@ void DriveIO::DoRead()
     hFile = INVALID_HANDLE_VALUE;
     hVolume = INVALID_HANDLE_VALUE;
     emit ProgressBarStatus(0.0, 0);
-    emit OperationComplet(Status::Cancelled = OperationStatus);
+    emit OperationComplete(Status::Canceled == OperationStatus);
 
-    if(Status::Exit == OperationStatus)
-    {
-        close();
-    }
+    // Completed successfully
     SetStatus(Status::Idle);
 }
 
@@ -249,6 +268,18 @@ void DriveIO::HandleWriteOverwriteConfirmation(const bool confirmed)
     }
 }
 
+void DriveIO::HandleRequestReadOperation(const QString fileName)
+{
+    SetImageFile(fileName);
+    ValidateRead();
+}
+
+void DriveIO::HandleRequestWriteOperation(const QString fileName)
+{
+    SetImageFile(fileName);
+    ValidateWrite();
+}
+
 void DriveIO::SetStatus(const Status status)
 {
     if(status != OperationStatus)
@@ -256,4 +287,42 @@ void DriveIO::SetStatus(const Status status)
         OperationStatus = status;
         emit StatusChanged(OperationStatus);
     }
+}
+
+QString DriveIO::GetHomeDir()
+{
+    if (HomeDir.isEmpty())
+    {
+        InitializeHomeDir();
+    }
+
+    return HomeDir;
+}
+
+void DriveIO::InitializeHomeDir()
+{
+    HomeDir = QDir::homePath();
+    if (HomeDir.isNull()){
+        HomeDir = qgetenv("USERPROFILE");
+    }
+
+    /* Get Downloads the Windows way */
+    QString downloadPath = qgetenv("DiskImagesDir");
+    if (downloadPath.isEmpty()) {
+        PWSTR pPath = nullptr;
+        static GUID downloads = {0x374de290, 0x123f, 0x4565, {0x91, 0x64, 0x39,
+                                                              0xc4, 0x92, 0x5e, 0x46, 0x7b}};
+        if (SHGetKnownFolderPath(downloads, 0, 0, &pPath) == S_OK) {
+            downloadPath = QDir::fromNativeSeparators(QString::fromWCharArray(pPath));
+            LocalFree(pPath);
+            if (downloadPath.isEmpty() || !QDir(downloadPath).exists()) {
+                downloadPath = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
+            }
+        }
+    }
+
+    if (downloadPath.isEmpty())
+        downloadPath = QDir::currentPath();
+
+    HomeDir = downloadPath;
 }
