@@ -39,6 +39,7 @@ HEADERS += disk.h\
            droppablelineedit.h \
            elapsedtimer.h \
            driveio.h \
+           settingsmanager.h \
            userinterface.h
 
 FORMS += mainwindow.ui
@@ -48,7 +49,8 @@ SOURCES += disk.cpp\
            mainwindow.cpp\
            droppablelineedit.cpp \
            elapsedtimer.cpp \
-           driveio.cpp
+           driveio.cpp \
+           settingsmanager.cpp
 
 RESOURCES += gui_icons.qrc translations.qrc
 

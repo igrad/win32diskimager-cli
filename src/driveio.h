@@ -51,24 +51,23 @@ signals:
     void InfoGeneratedHash(const QString hashString);
     void RequestReadOverwriteConfirmation();
     void SetProgressBarRange(const int min, const int max);
-    void ProgressBarStatus(const double mbpersec, const int completion);
+    void ProgressBarStatus(const double mbComplete, const int completion);
     void OperationComplete(const bool cancelled);
     void StartTimers();
+    void DrivesDetected(const QList<QString> drives);
 
 private:
     void SetStatus(const Status status);
-    QString GetHomeDir();
-    void InitializeHomeDir();
+    void GetDrives();
 
     char DriveLetter;
     QString ImageFilePath;
-    QString HomeDir;
     Status OperationStatus;
     bool ReadOnlyPartitions;
     bool SkipConfirmations;
-    HANDLE hVolume;
-    HANDLE hFile;
-    HANDLE hRawDisk;
+    HANDLE VolumeHandle;
+    HANDLE FileHandle;
+    HANDLE RawDiskHandle;
     unsigned long long SectorSize;
     char* SectorData;
     char* SectorData2; //for verify

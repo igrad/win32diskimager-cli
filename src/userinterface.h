@@ -25,9 +25,12 @@ public slots:
     virtual void HandleProgressBarStatus(const double mbpersec, const int completion) = 0;
     virtual void HandleOperationComplete(const bool cancelled) = 0;
     virtual void HandleStartTimers() = 0;
+    virtual void HandleSettingsLoaded(const QString imageDir, const QString fileType);
 
 signals:
     void ReadOverwriteConfirmation(const bool confirmed);
     void WriteOverwriteConfirmation(const bool confirmed);
     void RequestReadOperation(const QString fileName);
+    void RequestLoadSettings();
+    void RequestSaveSettings();
 };

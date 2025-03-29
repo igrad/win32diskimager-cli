@@ -69,6 +69,7 @@ public slots:
     void HandleProgressBarStatus(const double mbpersec, const int completion) override;
     void HandleOperationComplete(const bool cancelled) override;
     void HandleStartTimers() override;
+    void HandleSettingsLoaded(const QString imageDir, const QString fileType) override;
 
 protected slots:
     void on_tbBrowse_clicked();
@@ -89,24 +90,11 @@ protected:
 private:
     static MainWindow* instance;
     // find attached devices
-    void getLogicalDrives();
     void setReadWriteButtonState();
-    void saveSettings();
-    void loadSettings();
-    void initializeHomeDir();
-    void updateHashControls();
 
-    HANDLE hVolume;
-    HANDLE hFile;
-    HANDLE hRawDisk;
-    unsigned long long sectorsize;
-    char *sectorData;
-    char *sectorData2; //for verify
     QElapsedTimer update_timer;
     ElapsedTimer *elapsed_timer = NULL;
     QClipboard *clipboard;
     void generateHash(char *filename, int hashish);
-    QString myHomeDir;
-    QString myFileType;
     QStringList myFileTypeList;
 };

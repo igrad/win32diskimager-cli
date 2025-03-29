@@ -70,7 +70,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     sectorData = NULL;
     sectorsize = 0ul;
 
-    loadSettings();
+    emit RequestLoadSettings();
+    // Move this bit to the handler
     if (myHomeDir.isEmpty()){
         initializeHomeDir();
     }
