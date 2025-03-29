@@ -96,5 +96,7 @@ private:
     ElapsedTimer *elapsed_timer = NULL;
     QClipboard *clipboard;
     void generateHash(char *filename, int hashish);
+    QString HomeDir;
+    QString FileType;
     QStringList myFileTypeList;
 };

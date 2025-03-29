@@ -71,15 +71,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     sectorsize = 0ul;
 
     emit RequestLoadSettings();
-    // Move this bit to the handler
-    if (myHomeDir.isEmpty()){
-        initializeHomeDir();
-    }
-
-    if (myFileType.isEmpty()) {
-        myFileType = tr("Disk Images (*.img *.IMG)");
-    }
-    myFileTypeList << tr("Disk Images (*.img *.IMG)") << "*.*";
 }
 
 MainWindow::~MainWindow()
@@ -1097,6 +1088,22 @@ void MainWindow::HandleStartTimers()
 {
     update_timer.start();
     elapsed_timer->start();
+}
+
+void MainWindow::HandleSettingsLoaded(const QString imageDir, const QString fileType)
+{
+    ImageDir = imageDir;
+    FileType = fileType;
+
+    if (HomeDir.isEmpty()){
+        initializeHomeDir();
+    }
+
+    if (FileType.isEmpty()) {
+        FileType = tr("Disk Images (*.img *.IMG)");
+    }
+
+    FileTypeList << tr("Disk Images (*.img *.IMG)") << "*.*";
 }
 
 void MainWindow::updateHashControls()
