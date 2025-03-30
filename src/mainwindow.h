@@ -52,6 +52,7 @@ public:
     bool nativeEvent(const QByteArray &type, void *vMsg, long long *result) override;
 
 public slots:
+    void HandleArgs(const int argc, const char* argv[]) override;
     void HandleStatusChanged(const Status newStatus) override;
     void HandleWarnImageFileContainsNoData() override;
     void HandleWarnImageFileDoesNotExist() override;

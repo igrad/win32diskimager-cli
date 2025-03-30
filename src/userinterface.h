@@ -8,6 +8,7 @@ class UserInterface : public QObject
     Q_OBJECT
 
 public slots:
+    virtual void HandleArgs(const int argc, const char* argv[]) = 0;
     virtual void HandleStatusChanged(const Status newStatus) = 0;
     virtual void HandleWarnImageFileContainsNoData() = 0;
     virtual void HandleWarnImageFileDoesNotExist() = 0;

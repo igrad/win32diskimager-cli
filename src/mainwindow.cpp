@@ -47,19 +47,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     elapsed_timer = new ElapsedTimer();
     statusbar->addPermanentWidget(elapsed_timer);   // "addpermanent" puts it on the RHS of the statusbar
     getLogicalDrives();
-    status = STATUS_IDLE;
     progressbar->reset();
     clipboard = QApplication::clipboard();
     statusbar->showMessage(tr("Waiting for a task."));
-    hVolume = INVALID_HANDLE_VALUE;
-    hFile = INVALID_HANDLE_VALUE;
-    hRawDisk = INVALID_HANDLE_VALUE;
-    if (QCoreApplication::arguments().count() > 1)
-    {
-        QString fileLocation = QApplication::arguments().at(1);
-        QFileInfo fileInfo(fileLocation);
-        leFile->setText(fileInfo.absoluteFilePath());
-    }
     // Add supported hash types.
     cboxHashType->addItem("MD5",QVariant(QCryptographicHash::Md5));
     cboxHashType->addItem("SHA1",QVariant(QCryptographicHash::Sha1));
@@ -110,49 +100,6 @@ MainWindow::~MainWindow()
     {
         cboxHashType->clear();
     }
-}
-
-
-void MainWindow::saveSettings()
-{
-    QSettings userSettings("HKEY_CURRENT_USER\\Software\\Win32DiskImager", QSettings::NativeFormat);
-    userSettings.beginGroup("Settings");
-    userSettings.setValue("ImageDir", myHomeDir);
-    userSettings.setValue("FileType", myFileType);
-    userSettings.endGroup();
-}
-
-void MainWindow::loadSettings()
-{
-    QSettings userSettings("HKEY_CURRENT_USER\\Software\\Win32DiskImager", QSettings::NativeFormat);
-    userSettings.beginGroup("Settings");
-    myHomeDir = userSettings.value("ImageDir").toString();
-    myFileType = userSettings.value("FileType").toString();
-}
-
-void MainWindow::initializeHomeDir()
-{
-    myHomeDir = QDir::homePath();
-    if (myHomeDir.isNull()){
-        myHomeDir = qgetenv("USERPROFILE");
-    }
-    /* Get Downloads the Windows way */
-    QString downloadPath = qgetenv("DiskImagesDir");
-    if (downloadPath.isEmpty()) {
-        PWSTR pPath = NULL;
-        static GUID downloads = {0x374de290, 0x123f, 0x4565, {0x91, 0x64, 0x39,
-                                                              0xc4, 0x92, 0x5e, 0x46, 0x7b}};
-        if (SHGetKnownFolderPath(downloads, 0, 0, &pPath) == S_OK) {
-            downloadPath = QDir::fromNativeSeparators(QString::fromWCharArray(pPath));
-            LocalFree(pPath);
-            if (downloadPath.isEmpty() || !QDir(downloadPath).exists()) {
-                downloadPath = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
-            }
-        }
-    }
-    if (downloadPath.isEmpty())
-        downloadPath = QDir::currentPath();
-    myHomeDir = downloadPath;
 }
 
 void MainWindow::setReadWriteButtonState()
@@ -992,6 +939,16 @@ bool MainWindow::nativeEvent(const QByteArray &type, void *vMsg, long long *resu
     } // end of if msg->message
     *result = 0; //get rid of obnoxious compiler warning
     return false; // let qt handle the rest
+}
+
+void MainWindow::HandleArgs(const int argc, const char* argv[])
+{
+    if(argc >= 2)
+    {
+        QString fileLocation = argv[1];
+        QFileInfo fileInfo(fileLocation);
+        leFile->setText(fileInfo.absoluteFilePath());
+    }
 }
 
 void MainWindow::HandleStatusChanged(const Status newStatus)
