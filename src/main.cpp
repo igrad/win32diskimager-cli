@@ -31,20 +31,10 @@
 #include <windows.h>
 #include <winioctl.h>
 
-QCoreApplication* createApp(const bool headlessMode)
-{
-   bool headlessFlag = false;
-   for(int iter = 1; iter < argc; ++iter)
-   {
-      if(!qstrcmp(argv[iter], "-h"))
-
-   }
-}
-
 int main(int argc, char* argv[])
 {
    ArgsManager args(argc, argv);
-   QScopedPointer<QCoreApplication> createApp(headlessMode, argc, argv);
+   QScopedPointer<QCoreApplication> app(headlessMode, argc, argv);
 
    if(!headlessMode)
    {
