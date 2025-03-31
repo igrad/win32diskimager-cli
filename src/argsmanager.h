@@ -38,7 +38,7 @@ public:
    ArgsManager(int argc, char* argv[]);
    ~ArgsManager() = default;
 
-   const Arg GetArg(const ArgID id) const;
+   const QVariant GetArgValue(const ArgID id) const;
 
    static const QMap<ArgID, Arg> AllArgData;
 

@@ -31,31 +31,45 @@
 #include <windows.h>
 #include <winioctl.h>
 
+QCoreApplication* createApp(const bool headlessMode, int argc, char* argv[])
+{
+   if(headlessMode)
+   {
+      return new QCoreApplication(argc, argv);
+   }
+   else
+   {
+      return new QApplication(argc, argv);
+   }
+}
+
 int main(int argc, char* argv[])
 {
    ArgsManager args(argc, argv);
-   QScopedPointer<QCoreApplication> app(headlessMode, argc, argv);
+   const bool headlessMode = args.GetArgValue(ArgID::Headless).toBool();
+
+   DriveIO driveIO;
+
+   QScopedPointer<QCoreApplication> app(createApp(headlessMode, argc, argv));
 
    if(!headlessMode)
    {
-      QApplication app(argc, argv);
-      app.setApplicationDisplayName(VER);
-      app.setAttribute(Qt::AA_UseDesktopOpenGL);
+      QScopedPointer<QApplication> theApp(qobject_cast<QApplication*>(app.data()));
+      theApp.get()->setApplicationDisplayName(VER);
+      theApp.get()->setAttribute(Qt::AA_UseDesktopOpenGL);
 
       QTranslator translator;
       if(translator.load("translations/diskimager_" + QLocale::system().name()))
-         app.installTranslator(&translator);
+         theApp.get()->installTranslator(&translator);
 
       MainWindow* mainwindow = MainWindow::getInstance();
       mainwindow->show();
-
-      UserInterface* ui = static_cast<UserInterface*>(mainwindow);
-
-      return app.exec();
    }
    else
    {
 
       return 0;
    }
+
+   return app.get()->exec();
 }

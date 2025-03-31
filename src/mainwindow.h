@@ -32,72 +32,72 @@
 
 class MainWindow : public QMainWindow, public Ui::MainWindow, public UserInterface
 {
-    Q_OBJECT
+   Q_OBJECT
 
 public:
-    static MainWindow* getInstance() {
-        // !NOT thread safe  - first call from main only
-        if (!instance)
-            instance = new MainWindow();
-        return instance;
-    }
-    static MainWindow* getInstanceIfAvailable() {
-        // getInstance crashes if invoked during init to get MessageBox-parent
-        // thus, we simply return instance (NULL, if not yet created) to avoid app crash.
-        return instance;
-    }
+   static MainWindow* getInstance() {
+      // !NOT thread safe  - first call from main only
+      if (!instance)
+         instance = new MainWindow();
+      return instance;
+   }
+   static MainWindow* getInstanceIfAvailable() {
+      // getInstance crashes if invoked during init to get MessageBox-parent
+      // thus, we simply return instance (NULL, if not yet created) to avoid app crash.
+      return instance;
+   }
 
-    ~MainWindow();
-    void closeEvent(QCloseEvent *event) override;
-    bool nativeEvent(const QByteArray &type, void *vMsg, long long *result) override;
+   ~MainWindow();
+   void closeEvent(QCloseEvent *event) override;
+   bool nativeEvent(const QByteArray &type, void *vMsg, long long *result) override;
 
 public slots:
-    void HandleArgs(const int argc, const char* argv[]) override;
-    void HandleStatusChanged(const Status newStatus) override;
-    void HandleWarnImageFileContainsNoData() override;
-    void HandleWarnImageFileDoesNotExist() override;
-    void HandleWarnImageFileLocatedOnDrive() override;
-    void HandleWarnImageFilePermissions() override;
-    void HandleWarnNoLockOnVolume() override;
-    void HandleWarnFailedToUnmountVolume() override;
-    void HandleWarnNotEnoughSpaceOnVolume(const int required, const int availableSectors,
-                                    const int sectorSize,
-                                    const bool dataFound) override;
-    void HandleWarnUnspecifiedIOError() override;
-    void HandleInfoGeneratedHash(const QString hashString) override;
-    void HandleRequestReadOverwriteConfirmation() override;
-    void HandleSetProgressBarRange(const int min, const int max) override;
-    void HandleProgressBarStatus(const double mbpersec, const int completion) override;
-    void HandleOperationComplete(const bool cancelled) override;
-    void HandleStartTimers() override;
-    void HandleSettingsLoaded(const QString imageDir, const QString fileType) override;
+   void HandleArgs(const int argc, const char* argv[]) override;
+   void HandleStatusChanged(const Status newStatus) override;
+   void HandleWarnImageFileContainsNoData() override;
+   void HandleWarnImageFileDoesNotExist() override;
+   void HandleWarnImageFileLocatedOnDrive() override;
+   void HandleWarnImageFilePermissions() override;
+   void HandleWarnNoLockOnVolume() override;
+   void HandleWarnFailedToUnmountVolume() override;
+   void HandleWarnNotEnoughSpaceOnVolume(const int required, const int availableSectors,
+                                         const int sectorSize,
+                                         const bool dataFound) override;
+   void HandleWarnUnspecifiedIOError() override;
+   void HandleInfoGeneratedHash(const QString hashString) override;
+   void HandleRequestReadOverwriteConfirmation() override;
+   void HandleSetProgressBarRange(const int min, const int max) override;
+   void HandleProgressBarStatus(const double mbpersec, const int completion) override;
+   void HandleOperationComplete(const bool cancelled) override;
+   void HandleStartTimers() override;
+   void HandleSettingsLoaded(const QString imageDir, const QString fileType) override;
 
 protected slots:
-    void on_tbBrowse_clicked();
-    void on_bCancel_clicked();
-    void on_bWrite_clicked();
-    void on_bRead_clicked();
-    void on_bVerify_clicked();
-    void on_leFile_editingFinished();
-    void on_bHashCopy_clicked();
+   void on_tbBrowse_clicked();
+   void on_bCancel_clicked();
+   void on_bWrite_clicked();
+   void on_bRead_clicked();
+   void on_bVerify_clicked();
+   void on_leFile_editingFinished();
+   void on_bHashCopy_clicked();
 
 private slots:
-    void on_cboxHashType_IdxChg();
-    void on_bHashGen_clicked();
+   void on_cboxHashType_IdxChg();
+   void on_bHashGen_clicked();
 
 protected:
-    MainWindow(QWidget* = NULL);
+   MainWindow(QWidget* = NULL);
 
 private:
-    static MainWindow* instance;
-    // find attached devices
-    void setReadWriteButtonState();
+   static MainWindow* instance;
+   // find attached devices
+   void setReadWriteButtonState();
 
-    QElapsedTimer update_timer;
-    ElapsedTimer *elapsed_timer = NULL;
-    QClipboard *clipboard;
-    void generateHash(char *filename, int hashish);
-    QString HomeDir;
-    QString FileType;
-    QStringList myFileTypeList;
+   QElapsedTimer update_timer;
+   ElapsedTimer *elapsed_timer = NULL;
+   QClipboard *clipboard;
+   void generateHash(char *filename, int hashish);
+   QString HomeDir;
+   QString FileType;
+   QStringList myFileTypeList;
 };
