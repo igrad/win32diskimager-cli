@@ -28,7 +28,8 @@ enum class ArgID: int
    VerifyOnly,
    WriteOut,
    Quiet,
-   Verbose
+   Verbose,
+   Help
 };
 
 class ArgsManager
