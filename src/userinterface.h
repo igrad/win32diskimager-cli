@@ -27,6 +27,7 @@ public slots:
    virtual void HandleOperationComplete(const bool cancelled) = 0;
    virtual void HandleStartTimers() = 0;
    virtual void HandleSettingsLoaded(const QString imageDir, const QString fileType);
+   virtual void HandleLogicalDrivesDetected(/*Need args defined!*/);
 
 signals:
    void ReadOverwriteConfirmation(const bool confirmed);
@@ -34,4 +35,5 @@ signals:
    void RequestReadOperation(const QString fileName);
    void RequestLoadSettings();
    void RequestSaveSettings();
+   void RequestLogicalDrives();
 };

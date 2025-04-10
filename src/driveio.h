@@ -26,14 +26,20 @@ public:
 public slots:
     void ValidateRead();
     void ValidateWrite();
-    void DoRead();
-    void DoWrite();
-    void DoCancel();
 
     void HandleReadOverwriteConfirmation(const bool confirmed);
     void HandleWriteOverwriteConfirmation(const bool confirmed);
     void HandleRequestReadOperation(const QString fileName);
     void HandleRequestWriteOperation(const QString fileName);
+    void HandleRequestLogicalDrives();
+
+    // UI field update handlers
+    void HandleleFileTextUpdated(const QString textValue);
+
+ private slots:
+    void DoRead();
+    void DoWrite();
+    void DoCancel();
 
 signals:
     void StatusChanged(const Status newStatus);
@@ -50,6 +56,7 @@ signals:
     void WarnUnspecifiedIOError();
     void InfoGeneratedHash(const QString hashString);
     void RequestReadOverwriteConfirmation();
+    void RequestWriteOverwriteConfirmation();
     void SetProgressBarRange(const int min, const int max);
     void ProgressBarStatus(const double mbComplete, const int completion);
     void OperationComplete(const bool cancelled);
@@ -59,6 +66,7 @@ signals:
 private:
     void SetStatus(const Status status);
     void GetDrives();
+    QString GetHomeDir() const;
 
     char DriveLetter;
     QString ImageFilePath;

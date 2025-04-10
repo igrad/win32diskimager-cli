@@ -35,17 +35,20 @@ QMAKE_TARGET_COPYRIGHT = "Copyright (C) 2009-2017 Windows ImageWriter Team"
 
 # Input
 HEADERS += disk.h\
+           graphicalinterface.h \
            mainwindow.h\
            droppablelineedit.h \
            elapsedtimer.h \
            driveio.h \
            settingsmanager.h \
            userinterface.h \
-           argsmanager.h
+           argsmanager.h \
+           common.h
 
 FORMS += mainwindow.ui
 
 SOURCES += disk.cpp\
+           graphicalinterface.cpp \
            main.cpp\
            mainwindow.cpp\
            droppablelineedit.cpp \

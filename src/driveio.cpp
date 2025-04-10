@@ -19,7 +19,6 @@ DriveIO::DriveIO(QObject* parent)
     , SectorData2(nullptr)
 {
     GetDrives();
-    LoadSettings();
 }
 
 DriveIO::~DriveIO()
@@ -73,6 +72,25 @@ void DriveIO::ValidateRead()
     {
         DoRead();
     }
+}
+
+void DriveIO::ValidateWrite()
+{
+   if(!ImageFilePath.isEmpty())
+   {
+      QFileInfo fileInfo(ImageFilePath);
+      if(fileInfo.exists() && fileInfo.isFile() &&
+          fileInfo.isReadable() && (fileInfo.size() > 0))
+      {
+         if(ImageFilePath.at(0) == DriveLetter)
+         {
+            emit WarnImageFileLocatedOnDrive();
+            return;
+         }
+
+         emit RequestWriteOverwriteConfirmation();
+      }
+   }
 }
 
 void DriveIO::DoRead()
@@ -280,6 +298,17 @@ void DriveIO::HandleRequestWriteOperation(const QString fileName)
 {
     SetImageFile(fileName);
     ValidateWrite();
+}
+
+void DriveIO::HandleRequestLogicalDrives()
+{
+   // If drives haven't been found, go through and find them now
+   // Then emit logical drives found signal
+}
+
+void DriveIO::HandleleFileTextUpdated(const QString text)
+{
+   ImageFilePath = text;
 }
 
 void DriveIO::SetStatus(const Status status)

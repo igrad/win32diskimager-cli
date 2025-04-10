@@ -30,7 +30,7 @@
 #include "ui_mainwindow.h"
 #include "elapsedtimer.h"
 
-class MainWindow : public QMainWindow, public Ui::MainWindow, public UserInterface
+class MainWindow : public UserInterface
 {
    Q_OBJECT
 
@@ -48,8 +48,10 @@ public:
    }
 
    ~MainWindow();
-   void closeEvent(QCloseEvent *event) override;
-   bool nativeEvent(const QByteArray &type, void *vMsg, long long *result) override;
+
+   // These were inherited from QMainWindow and overrided - need to overwrite.
+   void closeEvent(QCloseEvent *event);
+   bool nativeEvent(const QByteArray &type, void *vMsg, long long *result);
 
 public slots:
    void HandleArgs(const int argc, const char* argv[]) override;
@@ -73,17 +75,17 @@ public slots:
    void HandleSettingsLoaded(const QString imageDir, const QString fileType) override;
 
 protected slots:
-   void on_tbBrowse_clicked();
-   void on_bCancel_clicked();
-   void on_bWrite_clicked();
-   void on_bRead_clicked();
-   void on_bVerify_clicked();
-   void on_leFile_editingFinished();
-   void on_bHashCopy_clicked();
+   void HandletbBrowseClicked();
+   void HandlebCancelClicked();
+   void HandlebWriteClicked();
+   void HandlebReadClicked();
+   void HandlebVerifyClicked();
+   void HandleleFileEditingFinished();
+   void HandlebHashCopyClicked();
 
 private slots:
-   void on_cboxHashType_IdxChg();
-   void on_bHashGen_clicked();
+   void HandlecboxHashTypeIndexChanged();
+   void HandlebHashGenClicked();
 
 protected:
    MainWindow(QWidget* = NULL);
@@ -91,13 +93,19 @@ protected:
 private:
    static MainWindow* instance;
    // find attached devices
-   void setReadWriteButtonState();
+   void SetReadWriteButtonState();
+   void SetUpUIConnections();
+   void UpdateHashControls();
 
+   Ui::MainWindow* ui;
+
+   QScopedPointer<QMainWindow> TheWindow;
    QElapsedTimer update_timer;
    ElapsedTimer *elapsed_timer = NULL;
    QClipboard *clipboard;
    void generateHash(char *filename, int hashish);
    QString HomeDir;
    QString FileType;
-   QStringList myFileTypeList;
+   QStringList FileTypeList;
+   Status CurrentStatus;
 };
