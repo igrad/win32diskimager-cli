@@ -1009,7 +1009,19 @@ void MainWindow::HandleWarnNotEnoughSpaceOnVolume(const int required, const int 
                 const int sectorSize,
                 const bool dataFound)
 {
+   // build the string for the warning dialog
+   std::ostringstream msg;
+   msg << "More space required than is available:"
+       << "\n  Required: " << numsectors << " sectors"
+       << "\n  Available: " << availablesectors << " sectors"
+       << "\n  Sector Size: " << SectorSize
+       << "\n\nThe extra space " << ((datafound) ? "DOES" : "does not") << " appear to contain data"
+       << "\n\nContinue Anyway?";
 
+   bool confirmed = QMessageBox::warning(this, tr("Not enough available space!"),
+                               tr(msg.str().c_str()), QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok));
+
+   emit ConfirmNotEnoughSpaceOnVolume(confirmed);
 }
 
 void MainWindow::HandleWarnUnspecifiedIOError()

@@ -33,6 +33,7 @@ signals:
    void ReadOverwriteConfirmation(const bool confirmed);
    void WriteOverwriteConfirmation(const bool confirmed);
    void RequestReadOperation(const QString fileName);
+   void RequestWriteOperation(const QString fileName);
    void RequestLoadSettings();
    void RequestSaveSettings();
    void RequestLogicalDrives();

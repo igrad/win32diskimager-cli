@@ -9,6 +9,7 @@
 #include <iostream>
 #include <sstream>
 #include "disk.h"
+#include "userinterface.h"
 
 class DriveIO: public QObject
 {
@@ -17,6 +18,8 @@ class DriveIO: public QObject
 public:
     explicit DriveIO(QObject* parent = nullptr);
     ~DriveIO();
+
+    void ConnectToUserInterface(const UserInterface* ui);
 
     bool SetImageFile(const QString filePath);
     bool SetDriveLetter(const char driveLetter);
@@ -66,7 +69,7 @@ signals:
 private:
     void SetStatus(const Status status);
     void GetDrives();
-    QString GetHomeDir() const;
+    QString GetHomeDir();
 
     char DriveLetter;
     QString ImageFilePath;
@@ -79,4 +82,7 @@ private:
     unsigned long long SectorSize;
     char* SectorData;
     char* SectorData2; //for verify
+    QString HomeDir;
+    QString FileType;
+    QStringList FileTypeList;
 };
